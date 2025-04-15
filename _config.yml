@@ -22,8 +22,8 @@ title: Nathan's Blog
 email: nathan.dickinson@cleancoders.com
 description: >- # this means to ignore newlines until "baseurl:"
   Welcome to my blog! I’ll be using this space to share my experiences, growth, and key takeaways throughout my apprenticeship with Clean Coders Studio.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/my-blog" # the subpath of your site, e.g. /blog
+url: "https://nathandickinson32.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  nathandickinson32
 
 # Build settings
