@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "day-2"
+date:   2025-04-15 08:22:30 -0400
+categories: apprenticeship update
+---
+day 2
