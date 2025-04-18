@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Structure"
-date:   2025-04-17 21:45:30 -0400
+date:   2025-04-17 21:43:30 -0400
 categories: apprenticeship update
 ---
 Today I worked through more of the Clojure koans and made solid progress. I'm getting close to the end and feeling much more comfortable with the syntax and flow of the language.
