@@ -11,16 +11,27 @@ With the remaining time, I continued working through the Clojure koans. I didnâ€
 Hereâ€™s the macro that caught my attention:
 
 (defmacro recursive-infix [form]
+
 (cond (not (seq? form))
+
 form
+
 (= 1 (count form))
+
 `(recursive-infix ~(first form))
+
 :else
+
 (let [operator (second form)
+
       first-arg (first form)
+
       others (drop 2 form)]
+
   `(~operator
+
 (recursive-infix ~first-arg)
+
 (recursive-infix ~others)))))
 
 This macro is designed to handle arithmetic expressions written in infix notation (like we would on paper) and transform them into valid Clojure prefix expressions. It uses recursion to evaluate each part of the expression, peeling it apart one level at a time and restructuring it so Clojure can process it properly.
