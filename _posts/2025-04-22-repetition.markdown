@@ -21,7 +21,7 @@ Here’s a small example of that in action. After getting the initial scoring lo
 I refactored the frame evaluation to make it clearer and more reusable. This version separates
 the spare and strike checks into named functions and uses them to determine how many rolls should
 be included in the score for a given frame:
-
+```clojure
 (defn spare? [rolls]
 (= 10 (reduce + (take 2 rolls))))
 
@@ -31,6 +31,8 @@ be included in the score for a given frame:
 (if (or (spare? rolls) (strike? rolls))
 (take 3 rolls)
 (take 2 rolls))
+```
+
 
 This refactor makes the logic easier to read, test, and change. It also keeps the frame-scoring
 logic focused on intent, rather than implementation details.
