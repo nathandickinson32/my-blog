@@ -12,7 +12,7 @@ Clojure handles custom data types. Defining a simple record with defrecord and t
 its fields using dot notation felt very different from how I’m used to handling data structures.
 Here's a quick example from the koan:
 ```clojure
-(defrecord Person [first-name last-name])
+(def record Person [first-name last-name])
 
 (def me (Person. "Nathan" "Dickinson"))
 

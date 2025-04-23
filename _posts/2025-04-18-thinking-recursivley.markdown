@@ -15,30 +15,21 @@ through many pages, but one in particular from the macros folder stood out and r
 got me thinking.
 
 Here’s the macro that caught my attention:
-
+```clojure
 (defmacro recursive-infix [form]
+          (cond (not (seq? form))
+                form
+                (= 1 (count form))
+                `(recursive-infix ~(first form))
+                :else
+                (let [operator (second form)
+                      first-arg (first form)
+                      others (drop 2 form)]
+                     `(~operator
+                        (recursive-infix ~first-arg)
+                        (recursive-infix ~others)))))
+```
 
-(cond (not (seq? form))
-
-form
-
-(= 1 (count form))
-
-`(recursive-infix ~(first form))
-
-:else
-
-(let [operator (second form)
-
-   first-arg (first form)
-
-   others (drop 2 form)]
-
-  `(~operator
-
-(recursive-infix ~first-arg)
-
-(recursive-infix ~others)))))
 
 This macro is designed to handle arithmetic expressions written in infix notation 
 (like we would on paper) and transform them into valid Clojure prefix expressions.
