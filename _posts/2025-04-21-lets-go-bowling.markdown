@@ -24,15 +24,19 @@ test by test, was incredibly helpful. They emphasized clarity and confidence in 
 and watching them reinforced everything I’d just learned about form.
 
 Here's an example of one of the very first tests I wrote:
-
+```clojure
 (it "gutter game is zero"
 (should= 0 (score (repeat 0))))
+```
+
 
 In bowling, a gutter game means every roll knocks down zero pins, so the total score is zero.
 That’s the simplest possible test case to start with, and writing a passing implementation
 for it looks like this:
-
+```clojure
 (defn score [_] 0)
+```
+
 
 This small step might not seem like much, but it sets the tone for the entire development flow.
 The test leads the code. You write the minimal code to make the test pass, then move

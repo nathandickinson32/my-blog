@@ -46,16 +46,22 @@ It uses recursion to evaluate each part of the expression, peeling it apart one 
 a time and restructuring it so Clojure can process it properly.
 
 Here's an example:
-
+```clojure
 (recursive-infix (10 + (2 * 3) + (4 * 5))) ; => 36
+```
+
 
 Under the hood, this becomes:
-
+```clojure
 (+ (+ 10 (* 2 3)) (* 4 5))
+```
+
 
 Which evaluates step by step to:
-
+```clojure
 (+ (+ 10 6) 20) ; => (+ 16 20) ; => 36
+```
+
 
 It’s a great example of how macros in Clojure can be used to reshape code itself.
 And it deepened my understanding of both recursion and macro behavior. As the koan jokingly
