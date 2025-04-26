@@ -1,0 +1,42 @@
+---
+layout: post
+title:  "Euler"
+date:   2025-04-25 15:20:10 -0400
+categories: apprenticeship update
+---
+
+I started today by setting up a new repo to work on Project
+Euler problems. After that, I jumped back into practicing
+the Bowling Game Kata a few more times before my live coding
+presentation.
+
+The presentation went really well. I was able to work through
+the kata and got a lot of great feedback, both constructive
+and positive. It felt good to see the practice paying off.
+
+After the presentation, I started working on Euler Problem 1.
+A big takeaway for me was realizing that when you practice TDD,
+it is normal to hardcode values at first just to get early tests
+to pass. It felt a little weird, but it made sense once I saw
+how it helps you build the real solution step-by-step. I also
+noticed how many tests you can write even for something that
+seems simple.
+
+Here is an example from early on:
+```clojure
+(it "finds the multiples of x of n with x=5"
+    (should= [] (get-multiples-of-x 0 5)))
+
+```
+To make this test pass, I started with a very simple, hardcoded solution:
+```clojure
+(defn get-multiples-of-x [n x]
+  [])
+
+```
+It is obviously not the final version, but that is the point.
+TDD is about getting something working fast, then growing and
+refactoring it as you add more tests. It really helped me slow down,
+trust the process, and take small, manageable steps.
+
+
