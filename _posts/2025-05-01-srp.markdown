@@ -1,0 +1,47 @@
+---
+layout: post
+title:  "SRP"
+date:   2025-04-30 14:12:40 -0400
+categories: apprenticeship update
+---
+Today I spent time brainstorming, taking notes,
+and gathering ideas for my next presentation on
+the Single Responsibility Principle (SRP).
+I'm starting to see how breaking things down into
+focused, clear pieces makes code easier to understand,
+test, and maintain.
+
+For those who might be unfamiliar, the Single
+Responsibility Principle is one of the five
+SOLID principles of object-oriented design.
+It states that a function or module should have one,
+and only one, reason to change. In other words, each
+part of your code should only have one responsibility.
+This makes your code more modular, easier to maintain,
+and more adaptable to future changes.
+
+My favorite example right now is a simple routine
+for a dog. Each action is clearly defined, and the
+routine itself just calls them in order.
+
+```clojure
+(ns dog.core)
+
+(defn bark [] (println "Woof!"))
+(defn sit [] (println "*sits*"))
+(defn walk-in-circle [] (println "*walks in a circle*"))
+(defn roll-over [] (println "*rolls over*"))
+
+(defn perform-routine []
+  (bark)
+  (sit)
+  (walk-in-circle)
+  (roll-over))
+```
+Each function does one thing. The perform-routine
+function doesn't care how the dog barks or sits, 
+it just knows what order to run things in. It’s
+a small but clean illustration of SRP.
+
+I'm excited to deepen my understanding of SRP as
+I prepare for this presentation.
