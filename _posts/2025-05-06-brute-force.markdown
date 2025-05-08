@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Confidence and Collaboration"
+title:  "Brute Force"
 date:   2025-05-06 16:10:00 -0400
 categories: apprenticeship update
 ---
