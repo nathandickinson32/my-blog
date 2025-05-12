@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Slow Start, Strong Finish"
+title:  "Building Up Speed"
 date:   2025-05-12 14:05:00 -0400
 categories: apprenticeship update
 ---
