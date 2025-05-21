@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Remember to start small"
-date:   2025-05-120 16:35:00 -0400
+date:   2025-05-20 16:35:00 -0400
 categories: apprenticeship update
 ---
 Today I tackled Euler Problem 11.
