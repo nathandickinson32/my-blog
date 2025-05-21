@@ -25,8 +25,22 @@ a row:
     (apply * (get-in grid [row])))))
 
 ```
-It still needs more logic to slide across sequences
-of four, but the structure’s beginning to take shape.
+This function is still early, but here’s what’s
+going on:
+get-in is a Clojure function used to access nested
+data structures. Since my grid is a vector of
+vectors (a 2D matrix), get-in takes the outer
+vector and a path, in this case [row], and returns
+the inner vector at that row index. So if row is 2,
+get-in grid [2] returns the entire third row. I
+then multiply all the numbers in that row using
+apply *.
+
+Eventually, I’ll want to refine this to slide
+through each row four numbers at a time
+(rather than multiplying the whole row), but
+this setup helped me start reasoning about
+how to loop through the grid cleanly.
 
 I also watched Uncle Bob’s SOLID case study today,
 which gave more concrete insight into how the
