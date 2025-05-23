@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Start smaller than that"
+title:  "Start Smaller Than That"
 date:   2025-05-23 17:25:00 -0400
 categories: apprenticeship update
 ---
