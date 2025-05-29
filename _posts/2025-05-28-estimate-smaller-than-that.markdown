@@ -6,9 +6,9 @@ categories: apprenticeship update
 ---
 
 Today I practiced the FizzBuzz kata. If you’re not familiar,
-it’s a classic exercise: write a program that prints numbers
-but for multiples of 3, print “Fizz,” for multiples of 5, print
-“Buzz,” and for numbers divisible by both, print “FizzBuzz.”
+you write a program that prints numbers but for multiples of
+3, print “Fizz,” for multiples of 5, print “Buzz,” and for
+numbers divisible by both, print “FizzBuzz.”
 
 I approached it using TDD, moving one number at a time and
 writing a test before writing any implementation. It’s a
@@ -30,14 +30,13 @@ multiple of 3 and 5, it lets me simplify the logic.
 
 I also practiced writing tests for generating number ranges
 and verifying console output. These are things I hadn't
-really done much of before. It's easy to overlook console
-printing when you're focused on return values, but testing
+really done much of before but testing
 for what the user sees is just as important.
 
-I also had IPM today, which gave me a chance to reflect on
-the last iteration. I underestimated a story last time and
-ended up falling behind. That created a domino effect that
-hurt everything else.
+I also had IPM today, which gave me a chance to think more
+deeply on the last iteration. I underestimated a story last
+time and ended up falling behind. That created a domino
+effect that hurt everything else.
 
 I almost made the same mistake again but this time I caught
 it. We broke the large story into a couple smaller, clearly
@@ -47,7 +46,7 @@ Today's takeaway:
 **Big stories should always be broken down into smaller, well-defined tasks.**
 
 No matter how confident I feel, it’s easy to overlook edge
-cases, testing complexity, or even just the mental load of
+cases, testing, or even just the mental load of
 trying to do too much at once. Smaller tasks seem to make
 me faster and more focused.
 
@@ -56,4 +55,4 @@ Some more things to think about when estimating:
 - What's the simplest piece I can test or build first?
 - How will I know when this story is truly done?
 
-**Breaking stories down is the heart of good estimating**
+**Breaking stories down is the heart of good estimating.**
