@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "Stub!"
+date:   2025-05-30 17:15:00 -0400
+categories: apprenticeship update
+---
+
+Today I worked more on my Tic Tac Toe project. Spent time
+fixing some untested code from the last iteration. One of
+the challenges I hit was testing larger functions. The
+functions that invoke other helper functions and include
+input/output logic.
+
+I wasn’t quite sure how to approach it at first. I wanted
+to verify the behavior of get-user-move, but I didn’t want
+to rely on the actual implementations of things like input
+prompts or move validation. With the help of some co-workers, 
+my mentor and some research I landed on a really helpful
+testing pattern in Clojure: using stubs and redefs-around
+from Speclj.
+
+Here’s a simplified version of what I ended up using:
+
+```clojure
+(context "get-user-move"
+         (with-stubs)
+
+         (redefs-around [output/player-prompt (stub :output/player-prompt)
+                         output/invalid-response (stub :output/invalid-response)
+                         sut/maybe-valid-move (stub :sut/maybe-valid-move
+                                                    {:invoke
+                                                     (fn [board input]
+                                                         (cond
+                                                           (= input "1") [0 0]
+                                                           (= input "2") [0 1]
+                                                           :else nil))})])
+
+         (it "displays player prompt"
+             (with-in-str "1\n"
+                          (sut/get-user-move output/starting-board \X))
+             (should-have-invoked :output/player-prompt {:with [\X]})))
+
+```
+**What's happening here?**
+- redefs-around lets me override real functions with stubs during a test.
+- I stubbed player-prompt, invalid-response, and maybe-valid-move, so I
+could isolate and test the behavior of get-user-move without relying on
+those actual implementations.
+- Using should-have-invoked, I checked that the prompt was actually
+called with the correct player symbol.
+
+This was a great step forward in understanding how to test interactions
+and flows instead of just pure functions.
+
+Big takeaway: you don’t have to fully test the internals of a function
+when what you’re really testing is how it interacts with its collaborators.
+Stubs and redefs-around make that possible in Clojure.
