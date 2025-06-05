@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "The Proof"
+date:   2025-06-04 14:55:00 -0400
+categories: apprenticeship update
+---
+
+Today I did some more refactoring and review on my Tic Tac Toe project. I took time to revisit and reinforce
+some of the newer concepts I worked with throughout the week. Things like redefs, stubbing functions, 
+capturing console input/output using with-in-str and with-out-str. All of these tools came together to make
+testing and debugging a more thoughtful part of my process, not an afterthought.
+
+I also spent time practicing my Interface Segregation Principle presentation. I like turning what I’ve learned
+into something I can teach. Explaining ideas like fat interfaces and making smaller, more focused abstractions
+is making me a better communicator.
+
+IPM this week went really well. I got detailed, constructive feedback. It wasn’t just “here’s what didn’t work,”
+it was “here’s how to make what’s working even better.” That shift feels like proof that I’m becoming a better
+programmer and that much closer to feeling like a craftsman.
+
+Even more important: this week was productive without the late nights. I completed what needed to be done without
+working late into the night or grinding through the weekend. I finally felt like I got my estimate right. I feel that
+it didn’t happen by chance, it came from really breaking down the story, mapping what was new vs. familiar, and
+adding margin for the unknowns.
+
+I tried to approach this coming week the same way. I reviewed the upcoming work, walked through the code, and started
+putting together a game plan. I was flagging areas that will need more attention, assigning more pessimistic estimates
+where things feel less familiar.
+
+Taking that extra time upfront helped a lot last week, and I’m hoping it pays off again. Feeling a little more
+confident heading into this iteration.
+
+Here’s to another good seven days.
