@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The Proof"
+title:  "cond and condp"
 date:   2025-06-05 16:40:00 -0400
 categories: apprenticeship update
 ---
