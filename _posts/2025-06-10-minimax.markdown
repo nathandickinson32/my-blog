@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Minimax"
+date: 2025-06-10 16:35:00 -0400
+categories: apprenticeship update
+---
+
+Today I started implementing the minimax algorithm for my Tic Tac Toe game.
+My first step was to build out some helper functions to check when the game
+is over and give a score to the board.
+
+Here’s what that looks like so far:
+
+```clojure
+(defn end-game? [board]
+      (or (core/win? board \X)
+          (core/win? board \O)
+          (core/full-board? board)))
+
+(defn score [board token]
+      (cond
+        (core/win? board token) 10
+        (core/win? board (core/switch-player token)) -10
+        :else 0))
+
+```
+Once I had that, I started to outline my next steps for building out
+the full minimax logic:
+
+- If the game is not over:
+- Switch to the next player
+- Get all available moves
+- Simulate each move and generate a new board
+- Recur with the new board and player
+- Gather scores from each path
+
+It’s helpful to work bottom up with a problem like this. First getting
+small utilities working and tested. It keeps things clearer once I get
+into the recursive part. Looking forward to seeing it choose its first move.
