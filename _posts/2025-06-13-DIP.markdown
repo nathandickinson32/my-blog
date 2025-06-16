@@ -1,0 +1,26 @@
+---
+layout: post
+title: "DIP"
+date: 2025-06-13 15:15:00 -0400
+categories: apprenticeship update
+---
+
+Today I made a slideshow presentation on the Dependency Inversion Principle.
+I try to relate these principles to something familiar, so I used a thermostat
+and a furnace. These analogies simplify things for me. In the “bad” version,
+the thermostat directly controls the furnace, which makes it hard to change
+or test anything without dragging the whole setup along with it.
+
+But when we introduce an abstraction between the two, like a HeatSource
+interface, they can communicate without being tightly connected. Now the
+thermostat doesn’t care what kind of heat it’s triggering, and we can swap
+out parts or test them by themselves without rewriting everything. This
+structure made the code cleaner and way easier to work with.
+
+I also built out some Java examples to match the analogy and showed how
+things get a little crazy when you don’t follow DIP and how much cleaner
+and more flexible it gets when you do.
+
+This one made a lot of sense once I saw it play out with something as familiar
+as heating a house. Definitely one of those principles that feels less abstract
+once you apply it to something concrete.
