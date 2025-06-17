@@ -1,0 +1,51 @@
+---
+layout: post
+title: "10-Digits"
+date: 2025-06-16 17:15:00 -0400
+categories: apprenticeship update
+---
+
+Today I finished Euler 13, which asks for the first 10 digits of a
+large sum from one hundred 50-digit numbers. The actual logic was
+pretty simple, flatten the list of big numbers, sum them up, and
+return the first 10 digits.
+
+Most of the work came down to keeping things clean and readable.
+I used threading to handle the flow:
+
+```clojure
+(defn euler-13 [numbers]
+      (-> numbers
+          (->sum-of-numbers)
+          (->string-number)))
+```
+
+My early degenerate tests with really small sums (like single-digit results)
+started throwing a Range [0, 10) out of bounds error. Not a bug in the
+solution, just an edge case created by the way I wrote my tests.
+
+To handle that, I wrote a little guard:
+
+```clojure
+(defn ->substring-number [string-number]
+      (subs string-number 0 10))
+
+(defn too-small? [string-number]
+      (<= (count string-number) 10))
+
+(defn ->substring? [string-number]
+      (if (too-small? string-number)
+        string-number
+        (->substring-number string-number)))
+
+(defn ->string-number [n]
+      (let [string-number (str n)]
+           (->substring? string-number)))
+```
+
+It makes the function safer for future use, especially during testing.
+And it was a good reminder: tests drive out more than just bugs, they push you
+to think through behavior you might otherwise skip over.
+
+Felt good to solve it in a clean, focused way. No premature optimization.
+Just what was needed.
