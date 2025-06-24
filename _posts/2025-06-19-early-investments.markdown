@@ -27,15 +27,13 @@ Here’s my small medium-ai namespace:
 ```
 
 The part I really enjoyed about this feature was how fast I was able to build
-it, not because it was easy, but because I had already laid the groundwork
-in earlier features. Writing that first AI took a while. I had to test
-everything from the ground up. Today I was able to reuse tested functions,
-trust that they work, and layer on top of them without breaking anything.
-All that earlier investment paid off.
+it. I had already laid the groundwork in earlier features. Writing that first 
+AI took a while. I had to test everything from the ground up. Today I was able 
+to reuse tested functions and trust that they work. All that earlier
+investment paid off.
 
-Writing clean, testable code early meant today felt like plugging in a few
+Writing clean, testable code early made today feel nice by plugging in a few
 new pieces and testing just those. I didn’t have to worry about everything
 falling apart.
 
-It’s moments like this that show how early investments make everything
-else smoother.
+Proving how early investments make everything else smoother.

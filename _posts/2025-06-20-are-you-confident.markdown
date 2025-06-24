@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Are You Confident?"
-date: 2025-06-10 15:30:00 -0400
+date: 2025-06-20 15:30:00 -0400
 categories: apprenticeship update
 ---
 
