@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Memoize"
+date: 2025-06-23 15:50:00 -0400
+categories: apprenticeship update
+---
+
+Today I studied memoization, and it was pretty cool to see the effects.
+
+I started by messing around in the REPL with a Fibonacci function to get
+a feel for how it works. I ran it without memoization and then with it, and the
+time difference was kind of wild:
+
+```clojure
+
+=> #'tic-tac-toe.main/m-fib
+(time (fib 40))
+"Elapsed time: 2880.218334 msecs"
+=> 165580141
+(time (m-fib 40))
+"Elapsed time: 0.19625 msecs"
+=> 165580141
+
+```
+
+Got the same result, but the second one took a fraction of the time because
+it remembered the previous calls. Seeing it laid out that clearly like this 
+made me see the power of it. But I wanted to explore the workings even deeper.
+I watched a video to truly see the graphs being cut down when running into 
+same boards with same input. 
+
+Once I had that working, I brought it into my Tic Tac Toe AI. My minimax
+function was getting slow as it explored deeper board states. This was the 
+exact problem memoization is good for. Rather than recalculating outcomes for
+the same boards over and over again, it now just grabs them from memory if it’s
+already seen them.
+
+```clojure
+
+(def memoized-minimax (memoize minimax))
+
+(defn ->score-one-move [next-board token max-token depth]
+  (memoized-minimax next-board (board/switch-player token) max-token (inc depth)))
+
+```
+
+After making that change, the game dropped from over 10 seconds down to under
+0.2 seconds to compute an expert AI move.
+
+Another successful TDD progression. I built what I needed first and optimized
+later when the problem actually called for it.
+
+I'm impressed in the way this apprenticeship is preparing me for problems and
+tasks ahead. I'm starting to see the rewards promised through these practices.
