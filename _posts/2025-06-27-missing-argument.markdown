@@ -41,6 +41,6 @@ things felt pretty smooth:
 
 ```
 
-Today was a good reminder that solid foundations make adding new features much
-more manageable. I love the payoff of early structure and TDD in how
+Today was another good reminder that solid foundations make adding new features
+much more manageable. I love the payoff of early structure and TDD in how 
 reusable my code has been across these changes.
