@@ -53,9 +53,8 @@ a full 16 space game tree. That is just too much. I’m still letting the AI pla
 at a pretty strong level, but with a realistic cutoff that keeps the game
 playable.
 
-Overall, I felt like I estimated this story well. I moved smoothly through
-the codebase, got a little help when I needed it, and ended up with something
-that feels good.
+Overall, I moved smoothly through the codebase, got a little help when I needed
+it, and ended up with something that feels good.
 
 Next up: something totally new to me. I'll be building a GUI with Quil and
 practicing a kata with it. I’m excited to see what this new challenge brings.
