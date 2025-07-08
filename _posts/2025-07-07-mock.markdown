@@ -1,0 +1,48 @@
+---
+layout: post
+title: "Mock"
+date: 2025-07-07 15:45:00 -0400
+categories: apprenticeship update
+---
+
+Today I got a bunch of practice reps in on the Langton’s Ant kata. My goal was
+to get it under 15 minutes, and while I didn’t quite hit that yet, I made some
+solid progress. I started around 25 minutes and got it down to about 17. I
+think with a little more practice I can tighten it up. It’s been a great
+exercise in both TDD and muscle memory.
+
+I also paired with my mentor to talk about how I might go about testing my Quil
+code. He showed me a few approaches, mocking with defmulti, stubbing Quil
+directly, or using a defprotocol.
+
+We ended up liking the defprotocol approach because it lets me keep track of
+what’s being invoked, which is super helpful when dealing with a lot of side
+effect.
+
+Here’s a quick example of what that looks like:
+
+```clojure
+
+(defprotocol GUI
+             (get-frame-rate [gui]))
+
+(def impl (atom nil)) ; holds our current GUI implementation
+
+(defn set-impl! [gui]
+      (reset! impl gui)) ; sets the current GUI for testing
+
+(defn clear! []
+      (set-impl! nil)) ; clears the test GUI
+
+(defn frame-rate []
+      (get-frame-rate @impl)) ; delegates between the test GUI or real one
+
+```
+
+This gives me a lot more control in tests because I can swap in a fake GUI that
+logs what methods are called and with what arguments. We’re planning to pair
+again soon to work through mocking out more of the GUI behavior and making the
+test suite tighter.
+
+Overall, today was a nice mix of practice, design, and test strategy. Pairing
+always helps when I’m in new territory!
