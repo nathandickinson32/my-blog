@@ -47,6 +47,6 @@ soon as it came up. It’s better to notify early than to try and play catch up.
 IPM went well today! One of my mentors was back from vacation, so we had a lot
 to go over. We ended up spending about three hours digging into code, talking
 through my choices, and going through my progress. Got some great feedback and
-had some really valuable discussions.
+had some really valuable discussions that will lead into some clean up work for tomorrow.
 
 Another good week here at Clean Coders!

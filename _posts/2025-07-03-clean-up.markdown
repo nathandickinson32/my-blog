@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Clean Up!"
+date: 2025-07-02 15:45:00 -0400
+categories: apprenticeship update
+---
+
+Today was all about cleaning up both my Tic Tac Toe project and the Langton’s
+Ant kata. Not getting into any new features just a lot of cleanup and
+consistency checks that ended up being overlooked by me and caught by my mentors.
+
+In Tic Tac Toe I refactored some of my 3x3 board code to match the style and
+structure of the 4x4 board. The 4x4 board demanded it be handled in strings due
+to it having double-digit options. This led to being able to use a lot of the
+same logic for formatting and printing both board sizes. It's the kind of thing
+that's easy to skip when you’re rushing, but taking the time to keep things
+consistent makes the whole codebase easier to read and maintain. Here's an
+example from my board namespace where I pulled out some repetition:
+
+```clojure
+
+(defn winning-diagonal-3x3? [board token]
+      (or (all-matching-tokens? (diagonal-right-3x3 board) token)
+          (all-matching-tokens? (diagonal-left-3x3 board) token)))
+
+(defn winning-diagonal-4x4? [board token]
+      (or (all-matching-tokens? (diagonal-right-4x4 board) token)
+          (all-matching-tokens? (diagonal-left-4x4 board) token)))
+
+(defn winning-diagonal? [board token board-size]
+      (if (= board-size :3x3)
+        (winning-diagonal-3x3? board token)
+        (winning-diagonal-4x4? board token)))
+
+```
+
+That’s a small refactor, but those kinds of changes start to add up when you're
+working across multiple board sizes.
+
+In Langton’s Ant, I cleaned up how I’m handling constants. I realized I was
+hardcoding a few numbers in different spots, so I decided to make the grid-width
+the single source of a hardcoded number and calculate everything else from it:
+
+```clojure
+
+(def grid-width 1000)
+(def cell-size (/ grid-width 100))
+(def grid-center (/ grid-width 2))
+(def grid-size [grid-width grid-width])
+
+```
+
+This way I can easily scale the whole grid by adjusting just one value. I
+haven’t worked with a ton of constants before but this was a good intro to
+keeping things flexible and readable through calculated values.
+
+*A lessons to remember:*
+
+- Before I leave a namespace I should check if there’s anything worth
+  refactoring. It’s a good habit to build and helps me keep my code in shape
+  without needing a big cleanup later.
+
+Today was a solid day of cleaning things up and building more good habits.
