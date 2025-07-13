@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mock"
+title: "Keeping Record"
 date: 2025-07-08 16:32:00 -0400
 categories: apprenticeship update
 ---
@@ -15,8 +15,7 @@ that were new to me: spit and slurp.
 - slurp reads the contents of a file into a string, which is great for checking
   what you’ve saved.
 
-Once I felt comfortable with those I focused on recording only the relevant
-pieces of state. There’s no need to record everything, just the important parts
+There’s no need to record everything, just the important parts
 like players, board and token.
 
 Here’s how I did it:
@@ -28,7 +27,7 @@ Here’s how I did it:
 
 ```
 
-This grabs the keys I care about. Then I format it into a string for the file:
+This grabs the keys I want. Then I format it into a string for the file:
 
 ```clojure
 
