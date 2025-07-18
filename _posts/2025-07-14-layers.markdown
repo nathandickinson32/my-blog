@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Layers"
+date: 2025-07-14 15:32:00 -0400
+categories: apprenticeship update
+---
+
+Today I worked on adding a 3x3x3 board option for my tic tac toe game. I
+started the same way I built out the 3x3 and 4x4 boards, by formatting the
+board first. This time, I wrote a function to doseq through each layer now
+that im printing multiple layers.
+
+After that, I followed the same general flow I used before: generate available
+positions, make a move, then check for wins. Today I just worked on a 2D level
+across the 3D board. Felt good to build off patterns I already had in place.
+Another solid day getting more comfortable navigating this codebase and
+using the tools I've built already.
+
+Here’s what I wrote to see if any layer has a winning row:
+
+```clojure
+(defn winning-row-3d? [board token]
+  (some #(winning-row-2d? % token) board))
+
+```
+
+I did similar functions for columns and diagonals using the (some) function to 
+map through each layer.
+
+A great Monday here at Clean Coders!
