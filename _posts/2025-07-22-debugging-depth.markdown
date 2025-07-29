@@ -9,7 +9,7 @@ Today I paired with my mentor to debug a problem in my expert AI for the 3x3x3
 version of Tic Tac Toe. The game would crash after just a few moves, and I
 couldn’t figure out why on my own.
 
-Watching my mentor debug was a great learning moment. He started at the top 
+Watching my mentor debug was a great learning moment. He started at the top
 level function (take-turn) and added print statements. From there he followed
 the flow of functions, dropping deeper into code until we reached a point where
 the println output either stopped or gave unexpected results. This led us right
@@ -33,7 +33,7 @@ That fixed the crashing, but I now needed to fix the bigger issue.
 
 I was tracking depth in the game state and passing that into minimax. So when
 minimax was called, it was starting from depth already over the limit. The
-final fix was to start minimax at depth 0 and remove depth from the game state 
+final fix was to start minimax at depth 0 and remove depth from the game state
 entirely now that it was unneeded. Now the AI plays smoothly in all board
 formats.
 
