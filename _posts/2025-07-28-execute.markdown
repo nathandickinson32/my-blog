@@ -36,6 +36,7 @@ Each ? in the SQL string gets filled with the corresponding value in the vector.
 In my function:
 
 1) The SQL string inserts values into the moves table.
+
 2) The vector that follows supplies each parameter:
 
 - game-id: A unique identifier for the game.
