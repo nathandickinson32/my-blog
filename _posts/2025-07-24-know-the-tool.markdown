@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "know-the-tool"
+title: "Know The Tool"
 date: 2025-07-24 17:10:00 -0400
 categories: apprenticeship update
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "know-the-tool"
+title: "Command Line Arguments"
 date: 2025-07-25 15:30:00 -0400
 categories: apprenticeship update
 ---
