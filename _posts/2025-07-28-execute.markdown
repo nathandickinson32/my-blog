@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Execute!"
+date: 2025-07-28 17:40:00 -0400
+categories: apprenticeship update
+---
+
+Today I started fully integrating PostgreSQL into my Tic Tac Toe project.
+Last week I completed a spike story to test out a database connection and
+functions. Today was about actually saving game state data to the database
+at every move.
+
+```clojure
+
+(defn save-to-db! [state]
+      (let [{:keys [X O board current-token game-id]} (->state-to-record state)]
+           (jdbc/execute! datasource/datasource
+                          ["INSERT INTO moves (game_id, player_x, player_o, current_token, board)
+                     VALUES (?, ?, ?, ?, ?)"
+                           game-id
+                           (name X)
+                           (name O)
+                           (name current-token)
+                           (json/generate-string board)])))
+
+
+```
+
+If you're new to working with SQL in Clojure, the execute! function from
+clojure.java.jdbc is your bridge between Clojure code and your database.
+It takes in a data source (your connection to the database) and a vector query,
+which can include SQL parameters (? are placeholders).
+
+Each ? in the SQL string gets filled with the corresponding value in the vector.
+
+In my function:
+
+1) The SQL string inserts values into the moves table.
+2) The vector that follows supplies each parameter:
+
+- game-id: A unique identifier for the game.
+- X and O: Player names or types (:human, :easy-ai, etc.), converted to strings.
+- current-token: Whose turn it is, as a string.
+- board: The board state, converted to a JSON string using cheshire.core/json.
+
+Next up is creating a script so that anyone who clones my repo can start
+playing with just a few command lines.
