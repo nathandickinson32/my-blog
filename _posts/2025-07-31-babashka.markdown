@@ -1,0 +1,68 @@
+---
+layout: post
+title: "Babashka"
+date: 2025-07-31 15:40:00 -0400
+categories: apprenticeship update
+---
+
+Today I paired with my mentor to implement a Babashka script into my Tic Tac
+Toe project! I’ve always been interested in setting up databases, and this gave
+me a great excuse to explore a new tool while practicing that.
+
+What is Babashka?
+
+Babashka is a fast starting Clojure scripting runtime that lets you run Clojure
+scripts with a focus on tooling and scripting tasks. This is perfect for CLIs or
+automation. We used it to create a script that can start up a database in a
+PostgreSQL with one command.
+
+Setting Up
+
+1. Create a bb.edn file
+2.
+
+```clojure
+
+{:paths ["dev"]
+ :deps  {tic_tac_toe/tic_tac_toe {:local/root "."}}
+ :pods  {org.babashka/postgresql {:version "0.1.0"}}
+ :tasks {create-db {:doc      "Initializes the SQL Database"
+                    :requires ([tic-tac-toe.create-db :as create-db])
+                    :task     (create-db/-main)}
+         spec      {:extra-paths ["spec/bb"]
+                    :extra-deps  {speclj/speclj {:mvn/version "3.10.0"}}
+                    :requires    ([speclj.main :as main])
+                    :task        (apply main/-main "-c" "spec/bb" *command-line-args*)}}
+ }
+
+```
+
+2. Create a namespace for script code and include this at the top
+
+```clojure
+
+#!/usr/bin/env bb
+
+(ns tic-tac-toe.create-db
+    (:require [tic-tac-toe.config :as config]
+      [pod.babashka.postgresql :as db]))
+
+```
+
+- #!/usr/bin/env bb
+  This tells your terminal to run the script using Babashka.
+- (ns tic-tac-toe.create-db ...)
+  connection info like database name, user, and password.
+- :require includes:
+
+1. tic-tac-toe.config: This is where I keep my db-spec, the map that holds
+   connection info like database name, user, and password.
+2. pod.babashka.postgresql: This what lets Babashka talk to
+   PostgreSQL
+
+This connection setup is the foundation for automating tasks like creating
+tables, seeding test data, or even resetting the DB if needed.
+
+This was my first time using Babashka pods, and I’m excited to keep going.
+Tomorrow I’ll share how I used this connection to create the actual table
+schema.
