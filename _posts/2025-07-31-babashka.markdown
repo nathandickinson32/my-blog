@@ -18,8 +18,7 @@ PostgreSQL with one command.
 
 Setting Up
 
-1. Create a bb.edn file
-2.
+# Create a bb.edn file
 
 ```clojure
 
@@ -37,7 +36,7 @@ Setting Up
 
 ```
 
-2. Create a namespace for script code and include this at the top
+# Create a namespace for script code and include this at the top
 
 ```clojure
 
@@ -49,15 +48,15 @@ Setting Up
 
 ```
 
-- #!/usr/bin/env bb
-  This tells your terminal to run the script using Babashka.
-- (ns tic-tac-toe.create-db ...)
-  connection info like database name, user, and password.
-- :require includes:
+1. #!/usr/bin/env bb
+2. This tells your terminal to run the script using Babashka.
+3. (ns tic-tac-toe.create-db ...)
+4. connection info like database name, user, and password.
+5. :require includes:
 
-1. tic-tac-toe.config: This is where I keep my db-spec, the map that holds
+- tic-tac-toe.config: This is where I keep my db-spec, the map that holds
    connection info like database name, user, and password.
-2. pod.babashka.postgresql: This what lets Babashka talk to
+- pod.babashka.postgresql: This what lets Babashka talk to
    PostgreSQL
 
 This connection setup is the foundation for automating tasks like creating
