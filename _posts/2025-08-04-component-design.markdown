@@ -9,9 +9,6 @@ Today I prepared a presentation on component design. If you've ever wondered how
 to group classes into components, or why certain designs feel brittle or hard to
 maintain, this is probably why.
 
-This triangle diagram below shows the relationship between the cohesion
-principals:
-
 - Component Reuse Principle (CRP) — Classes that are reused together should be
 packaged together.
 - Common Closure Principle (CCP) — Classes that change for the same reason
