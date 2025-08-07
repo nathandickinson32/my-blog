@@ -13,13 +13,13 @@ This triangle diagram below shows the relationship between the cohesion
 principals:
 
 - Component Reuse Principle (CRP) — Classes that are reused together should be
-- packaged together.
+packaged together.
 - Common Closure Principle (CCP) — Classes that change for the same reason
-- should be packaged together.
+should be packaged together.
 - Reuse/Release Equivalence Principle (REP) — Components reused together should
-- be released together.
+be released together.
 
-![A useful diagram](/assets/images/cohesion-triangle.png)
+<img alt="A useful diagram" height="400" src="/assets/images/cohesion-triangle.png" width="400"/>
 
 # The Tradeoffs
 
