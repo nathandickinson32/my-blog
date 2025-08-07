@@ -19,8 +19,6 @@ should be packaged together.
 - Reuse/Release Equivalence Principle (REP) — Components reused together should
 be released together.
 
-<img alt="A useful diagram" height="400" src="/assets/images/cohesion-triangle.png" width="400"/>
-
 # The Tradeoffs
 
 At the beginning of a project, we lean heavily toward CCP and CRP.
