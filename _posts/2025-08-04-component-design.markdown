@@ -19,7 +19,7 @@ principals:
 - Reuse/Release Equivalence Principle (REP) — Components reused together should
 - be released together.
 
-<img src="/assets/images/cohesion-triangle.png" alt="A useful diagram" style="width:400px;">
+![A useful diagram](/assets/images/cohesion-triangle.png)
 
 # The Tradeoffs
 
