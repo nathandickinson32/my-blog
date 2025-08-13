@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Map Invert"
+title: "Parsing Replay"
 date: 2025-08-07 16:45:00 -0400
 categories: apprenticeship update
 ---
