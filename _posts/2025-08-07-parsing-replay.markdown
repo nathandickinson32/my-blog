@@ -31,7 +31,7 @@ lein run --edn
 
 ```
 
-database will be :edn-file
+the database will be :edn-file.
 Otherwise, it defaults to :postgres.
 If the user includes --replay, we know they’re asking to see a past game then
 I grab the first argument that isn’t an option flag (--something). That’s
