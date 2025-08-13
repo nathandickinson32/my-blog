@@ -1,0 +1,61 @@
+---
+layout: post
+title: "GUI Alias"
+date: 2025-08-12 16:10:00 -0400
+categories: apprenticeship update
+---
+
+Today I added a GUI alias to my deps.edn file so I can run:
+
+```clojure
+
+clj -M:gui
+
+```
+
+and instantly have my Tic Tac Toe graphical interface pop up.
+
+Here’s the relevant snippet from deps.edn:
+
+```clojure
+
+:aliases {
+          :gui {:main-opts ["-m" "tic-tac-toe.gui"]}
+          }
+
+```
+
+This tells Clojure:
+“When the user runs -M:gui, start the tic-tac-toe.gui namespace and run its
+-main function.”
+
+Clojure’s aliases are like shortcuts or “profiles” for running your project.
+They can:
+
+- Add extra dependencies
+- Add extra source or test paths
+- Change the program’s entry point (-main)
+- Pass in special command-line options
+
+My Other Aliases:
+
+```clojure
+
+:test {:extra-deps  {speclj/speclj {:mvn/version "3.10.0"}}
+       :extra-paths ["spec/clj" "spec/bb" "dev"]}
+
+:spec {:main-opts ["-m" "speclj.main" "-c"]}
+
+:run {:main-opts ["-m" "tic-tac-toe.main"]}
+
+```
+
+- :test → Loads extra libraries + test files
+- :spec → Runs my test suite with speclj
+- :run → Runs the core game (no GUI)
+
+No remembering the long clj -M -m tic-tac-toe.gui command. Just clj -M:gui.
+Anyone looking at your deps.edn instantly knows how to run and test your project.
+
+Adding a :gui alias might seem small, but it makes development smoother. Now I
+can switch between my CLI and GUI versions in seconds without touching my code.
