@@ -8,8 +8,9 @@ categories: apprenticeship update
 Today I implemented a replay feature for my Tic Tac Toe game, pulling the moves
 straight from my Postgres database. The function isn’t cleaned up yet, but the
 main teaching point is this:
+
 - How to take a list of moves and reconstruct every board state from start to
-finish.
+  finish.
 
 ```clojure
 
@@ -41,12 +42,14 @@ finish.
 
 When we store a game in Postgres, we don’t save the entire board for each move,
 that would be redundant. Instead, we store:
+
 - game_id => Which game the move belongs to
 - moves/move => The position played
 - moves/token => Who played it (:X or :O)
 
 Loop through each move in order converting the stored move position (e.g., "5")
 into grid coordinates:
+
 ```clojure
 
 (board/->grid-coordinates (:moves/move move) board-size)
