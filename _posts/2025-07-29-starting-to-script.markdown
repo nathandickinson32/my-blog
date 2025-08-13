@@ -22,7 +22,7 @@ save game moves. It was fun to mix command-line work, Clojure, and PostgreSQL.
 
 Here’s what the user setup flow looks like now:
 
-1. Install PostgreSQL
+Install PostgreSQL
 
 ```clojure
 
@@ -30,7 +30,7 @@ $ brew install postgresql @14
 
 ```
 
-2. Create the tic_tac_toe database
+Create the tic_tac_toe database
 
 ```clojure
 
@@ -41,7 +41,7 @@ postgres=# \q
 
 ```
 
-3. Run the Database setup script
+Run the Database setup script
 
 ```clojure
 

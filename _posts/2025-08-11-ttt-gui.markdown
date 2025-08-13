@@ -33,9 +33,9 @@ Here’s my current function for handling it:
 
 ```
 
-1. Get the click coordinates
-   Every click comes with an (x, y) location.
-   Dividing by cell-size tells us which cell the click landed in:
+Get the click coordinates
+Every click comes with an (x, y) location.
+Dividing by cell-size tells us which cell the click landed in:
 
 ```clojure
 
@@ -44,7 +44,7 @@ Here’s my current function for handling it:
 
 ```
 
-2. Check if the cell is empty and the game isn’t over
+Check if the cell is empty and the game isn’t over
 
 ```clojure
 
@@ -53,8 +53,8 @@ Here’s my current function for handling it:
 
 ```
 
-3. Update the board
-   If the click is valid, we use assoc-in to place an :x in that spot:
+Update the board
+If the click is valid, we use assoc-in to place an :x in that spot:
 
 ```clojure
 
@@ -62,8 +62,8 @@ Here’s my current function for handling it:
 
 ```
 
-4. Check if the board is full
-   If all-filled? returns true, we set a "Game Over!" message.
+Check if the board is full
+If all-filled? returns true, we set a "Game Over!" message.
 
 The grid math felt familiar thanks to my work on Langton’s Ant, but connecting
 it to an interactive click was brand new. It’s one thing to draw a grid, it’s
