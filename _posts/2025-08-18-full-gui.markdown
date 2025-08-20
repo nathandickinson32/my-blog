@@ -1,0 +1,36 @@
+---
+layout: post
+title: "Full GUI"
+date: 2025-08-18 16:10:00 -0400
+categories: apprenticeship update
+---
+
+Today I worked on fully implementing my Tic Tac Toe GUI. This was the first
+time I’ve built a complete interactive flow, letting a user actually click
+through screens to set up a game and then play it.
+
+One piece I want to highlight is the draw-state function:
+
+```clojure
+
+(defn draw-state [state]
+      (cond (nil? (:current-token state)) (choose-first-player-page)
+            (nil? (:X state)) (choose-player-X-page)
+            (nil? (:O state)) (choose-player-O-page)
+            :else (play-game-page state)))
+
+```
+
+Instead of having one giant "render everything" function, I break the GUI into
+pages, and draw-state decides which page to render based on what’s in the
+game state.
+
+For example:
+
+- If the current token hasn’t been chosen → show the first player selection page.
+- If player X hasn’t been picked → show the player X selection page.
+- If player O hasn’t been picked → show the player O selection page.
+- Otherwise → render the actual game board.
+
+It also means I can extend this easily. When I later add new features all I
+have to do is add another branch to draw-state.
