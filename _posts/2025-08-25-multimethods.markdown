@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Multi-Methods"
-date: 2025-08-28 16:40:00 -0400
+date: 2025-08-25 16:40:00 -0400
 categories: apprenticeship update
 ---
 
