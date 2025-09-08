@@ -1,0 +1,44 @@
+---
+layout: post
+title: "HashMaps"
+date: 2025-09-04 16:32:00 -0400
+categories: apprenticeship update
+---
+
+Today I put together a slide show presentation on Hash Maps to better understand
+how they work and why they’re so useful.
+
+Hash Maps are a data structure that store key-value pairs. They allow you to
+quickly look up a value using a key, usually in O(1) average time.
+
+# How Hash Maps Work
+
+1. Hashing the Key: Each key is passed through a hash function, which converts
+   it into an index in an underlying array.
+2. Handling Collisions: Sometimes two keys hash to the same index. There are
+   two main strategies:
+
+- Chaining: Store multiple key-value pairs at the same index using a linked list.
+- Open Addressing: Find another open slot in the array according to a probing
+  sequence.
+
+3. Resizing: When the array fills up, the Hash Map can grow and rehash all keys
+   to maintain fast performance.
+
+# Key Points
+
+- Provides fast lookup, insertion, and deletion on average.
+- Performance depends on a good hash function and handling collisions effectively.
+- Resizing ensures that the Hash Map maintains O(1) average performance even as
+  it grows.
+
+# Slide Show Approach
+
+For my presentation, I created slides showing:
+
+- How keys map to indices.
+- What happens when collisions occur.
+- How resizing works to keep operations fast.
+
+Making a slide show helped me visualize the inner workings of Hash Maps and
+explain the concepts clearly without diving into too much code at once.
