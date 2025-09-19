@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Resizing My HashMap"
+date: 2025-09-08 16:18:00 -0400
+categories: apprenticeship update
+---
+
+Today I finished my custom hashMap implementation in Java. One of the most
+interesting parts of this work was getting resizing and rehashing to work
+properly.
+
+# Why Resize?
+
+A HashMap is backed by an array of "buckets." When too many keys pile into the
+same bucket, performance degrades (lots of collisions). To avoid this, HashMaps
+use a load factor (I chose `0.75`). Once 75% full, the backing array is
+doubled in size, and all entries are rehashed into the new array.
+
+# Resizing Logic
+
+```java
+
+private void expandMapIfNeeded() {
+    if ((double) (length + 1) / buckets.size() > GROWTH_FACTOR) {
+        resize();
+    }
+}
+
+private void resize() {
+    List<List<Entry<TKey, TValue>>> oldBuckets = buckets;
+    buckets = new ArrayList<>();
+    initBuckets(oldBuckets.size() * 2);
+    length = 0;
+    for (List<Entry<TKey, TValue>> bucket : oldBuckets) {
+        for (Entry<TKey, TValue> entry : bucket) {
+            put(entry.key, entry.value);
+        }
+    }
+}
+
+```
+
+# What I Learned
+
+- Resizing is expensive: every key must be rehashed and moved.
+- But it’s rare: with doubling, the average cost of put remains very
+  efficient (amortized O(1)).
+- Implementing it myself helped me understand why Java’s HashMap feels so
+  fast, the tradeoff between occasional expensive operations and usually
+  constant-time performance.
