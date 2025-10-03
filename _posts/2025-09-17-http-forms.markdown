@@ -9,7 +9,7 @@ categories: apprenticeship update
 
 Two Main Ways Forms Send Data
 
-1. GET Forms:  parameters are added directly into the URL.
+GET Forms:  parameters are added directly into the URL.
    Example request:
    GET /form?foo=1&bar=2 HTTP/1.1
 
@@ -23,7 +23,7 @@ My server parses the query string into key–value pairs and renders them back:
 
 ```
 
-2. POST Forms: data is sent in the body of the request.
+ POST Forms: data is sent in the body of the request.
 
 - If application/x-www-form-urlencoded, it looks just like the query string.
 - If multipart/form-data, it can even include files.
