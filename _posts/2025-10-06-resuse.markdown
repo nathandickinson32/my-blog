@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Reuse!"
+date: 2025-10-06 16:18:00 -0400
+categories: apprenticeship update
+---
+
+Back to work on serving my tic-tac-toe game today, I dove into the part where
+my Java server talks to my Clojure Tic Tac Toe logic. I spent most of the day
+working on the game handler, and it hit me again how much clean, reusable code
+makes life easier.
+
+# The Magic of Reusable Functions
+
+One of the best parts about how I structured my Tic Tac Toe code was that I
+could just plug in a game map, call a function, and get a complete new game
+state back.
+
+```clojure
+
+(defn ->next-state [state move]
+      (let [new-state (game/->new-state state move)
+            board (:board new-state)
+            size (:board-size state)
+            winner (cond (board/win? board :X size) :X
+                         (board/win? board :O size) :O)
+            draw (board/full-board? board size)]
+           (flag-end-game winner draw new-state)))
+
+```
+
+I didn’t have to rewrite the game logic in the server, or how the board updates,
+or how to check for a winner. Everything was already encapsulated in the Tic Tac
+Toe code. I just feed in a move and get a new game state back. That’s it.
+
+# Clean Code Makes Integration Smooth
+
+This project really reinforced why clean, composable code matters. Because I
+kept my Tic Tac Toe functions small, focused, and predictable, integrating them
+with the Java HTTP server was painless. Functions like update-game and
+update-or-ensure-game handle edge cases like invalid moves or initializing a
+new board, so my server handler never has to deal with that logic.
+
+```clojure
+
+(defn update-or-ensure-game [game move]
+      (if (:board game)
+        (update-game game move)
+        {:board         starting-board
+         :current-token :X
+         :turn-count    0}))
+
+```
+
+This little function is a perfect example: if the game map is missing
+(like when a new session starts), it creates a fresh game. If there’s already a
+board, it just updates it. I don’t have to duplicate that logic anywhere in the
+server.
+
+Without this separation:
+
+- I’d have to copy game logic into the server, which would be messy and error-prone.
+- Any future changes to game rules would need edits in multiple places.
+- Debugging would be a nightmare.
+
+Instead, by keeping game logic in one place and making it reusable, I can focus
+on just handling HTTP requests and responses in the server.

@@ -1,0 +1,90 @@
+---
+layout: post
+title: "Threads"
+date: 2025-10-02 16:18:00 -0400
+categories: apprenticeship update
+---
+
+Today I added thread pooling to my server project, and it felt like magic at
+first. I’d seen ExecutorService and newFixedThreadPool in examples, but I didn’t
+really understand why they were important, or what threads even were outside of
+sockets.
+
+# What Threads Really Are
+
+Threads are basically lightweight mini-programs running inside your program. 
+Your computer can run multiple threads at the same time, which is how apps feel
+responsive even when doing multiple things at once.
+
+Think of a thread like a worker in a factory:
+
+- One worker can handle one task at a time.
+- You can have many workers (threads) doing different tasks at the same time.
+- If you try to do too much with too few workers, everything slows down.
+
+In Java, each thread has its own call stack and execution context, but shares 
+memory with other threads in the same program. That’s why you can safely share
+data, but you also need to be careful with synchronization.
+
+# Why Threads Matter in a Server
+2
+When I first wrote my server, I was accepting connections like this:
+
+```java
+
+Socket client = serverSocket.accept();
+
+handleClient(client);
+
+```
+
+This works, but it blocks the server. That means if one client takes a while to
+send data, no one else can connect until the first client finishes. Not great.
+
+Threads solve this problem: each client can be handled independently, so one
+slow client doesn’t block the others.
+
+# Thread Pools
+
+A thread pool is like hiring a team of workers instead of making a new worker
+for every single task. In my server, I used:
+
+```java
+
+ExecutorService threadPool = Executors.newFixedThreadPool(maxThreads);
+
+```
+
+This creates a fixed number of threads (workers) ready to handle incoming
+client connections. Then, for each client:
+
+```java
+
+threadPool.submit(() -> {
+    try {
+        handleClient(client);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+});
+
+```
+
+- submit() hands the task to the pool.
+- The pool picks an available thread to run it.
+- If all threads are busy, new tasks wait in a queue until a thread is free.
+
+This keeps the server stable and predictable. If I tried to create a new thread
+for every client without limits, a lot of clients could crash the server or eat
+up memory. The thread pool manages resources for me.
+
+# Why Managing Threads is Important
+
+Threads are powerful, but dangerous if mismanaged:
+
+- Too few threads: server becomes slow, requests pile up.
+- Too many threads: memory and CPU get overloaded.
+- Threads that never finish: resources leak, server eventually crashes.
+
+Using a thread pool solves most of these problems because it controls the number
+of active threads, queues the rest, and makes sure everything runs efficiently.

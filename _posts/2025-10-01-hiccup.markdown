@@ -1,0 +1,76 @@
+---
+layout: post
+title: "Hiccup"
+date: 2025-10-01 16:18:00 -0400
+categories: apprenticeship update
+---
+
+When I first started building the web version of my Tic Tac Toe game, I had no
+idea how to turn my game state into HTML. I was imagining a mess of strings,
+concatenations, and escaping everywhere. Then I found Hiccup, and it was…
+actually pretty straightforward. HTML as Clojure data? Mind blown.
+
+Here’s what I wish I had known before jumping in.
+
+# HTML as Data Makes Life Easier
+
+Hiccup treats HTML like data you can manipulate. That means no weird string
+building, no escaping, nothing. You just create vectors and maps, and boom
+there's HTML. For example, my board looks like this:
+
+```clojure
+
+[:div#board
+ (->button-grid board winner draw)]
+
+```
+
+That’s it. Each vector is a tag, with an optional map for attributes, and the
+rest are children. Because it’s just data, I can swap out a button or change a
+class depending on the game state, and it all updates cleanly. So much easier
+than the headache I expected.
+
+# Forms for Each Square? Totally Manageable
+
+Each square on the board is actually its own form:
+
+```clojure
+
+[:form {:method "POST" :action "/move" :style "display:inline;"}
+ [:input {:name "row" :type "hidden" :value row}]
+ [:input {:name "col" :type "hidden" :value col}]
+ [:button.square {:type "submit"} (or move "")]]
+
+```
+
+At first, I thought this was going to be difficult to loop over, disable, or
+style, but Hiccup makes it simple. I can check if the square has already been
+played, or if the game is over, and just disable the button. Easy.
+
+# CSS Still Works Like CSS
+
+Hiccup doesn’t mess with your CSS. I just inject a style string from a css file
+in a public directory under resources:
+
+```clojure
+
+[:style @game-styles]
+
+```
+
+My .square class, my grid for #board—all the normal CSS works. Keeps my logic
+separate from how it looks!
+
+# Dynamic Content Feels Natural
+
+Want to show the current player, or the winner, or a draw message? Hiccup makes
+it easy:
+
+```clojure
+
+[:div#status (->status-message current-token winner draw)]
+
+```
+
+Because everything is just data, swapping out the message is easy. No weird
+template hacks, no messy DOM updates, just let Clojure do its thing.
