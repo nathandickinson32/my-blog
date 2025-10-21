@@ -1,11 +1,8 @@
 ---
 layout: post
-title: "Tic Tac Toe!"
+title: "Play Tic Tac Toe!"
 date: 2025-10-21 16:32:32 -0400
 categories: apprenticeship update
 ---
-
-
-Have Fun!
 
 <iframe src="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html" width="100%" height="800" style="border:none;" title="Tic Tac Toe Game"></iframe>
