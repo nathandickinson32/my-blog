@@ -6,8 +6,6 @@ categories: apprenticeship update
 ---
 
 
-ttt testinggggg
+Have Fun!
 
 <iframe src="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html" width="100%" height="800" style="border:none;" title="Tic Tac Toe Game"></iframe>
-
-
