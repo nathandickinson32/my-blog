@@ -8,4 +8,8 @@ categories: apprenticeship update
 
 ttt testing
 
-<link rel="canonical" href="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html"/>
+```html
+<link href="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html"/>
+```
+
+
