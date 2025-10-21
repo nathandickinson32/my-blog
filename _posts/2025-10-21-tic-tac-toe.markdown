@@ -9,6 +9,6 @@ categories: apprenticeship update
 ttt testinggggg
 
 {% raw %}
-<iframe src="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html" width="100%" height="800" style="border:none;" title="Tic Tac Toe Game"></iframe>
+<iframe src="/public/tic_tac_toe/index.html" width="100%" height="800" style="border:none;" title="Tic Tac Toe Game"></iframe>
 {% endraw %}
 
