@@ -7,7 +7,7 @@ categories: apprenticeship update
 
 
 
-<html>
+<html lang="">
 <script>
 window.location = "github.io/my-blog/public/index.html
 </script>
