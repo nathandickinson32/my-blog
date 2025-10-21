@@ -9,6 +9,6 @@ categories: apprenticeship update
 
 <html lang="">
 <script>
-window.location = "nathandickinson32.github.io/my-blog/public/index.html"
+window.location = "https://nathandickinson32.github.io/my-blog/public/index.html"
 </script>
 </html>
