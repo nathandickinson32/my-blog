@@ -5,6 +5,6 @@ date: 2025-10-21 16:32:32 -0400
 categories: apprenticeship update
 ---
 
-<iframe src="https://nathandickinson32.github.io/my-blog/public/index.html"width="100%"height="800"style="border:none;"title="Nathan Dickinson Blog"></iframe>
+<iframe src="/public/index.html" width="100%" height="600" frameborder="0"></iframe>
 
 
