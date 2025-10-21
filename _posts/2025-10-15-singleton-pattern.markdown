@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Singleton"
-date: 2025-10-14 16:18:00 -0400
+date: 2025-10-15 16:18:00 -0400
 categories: apprenticeship update
 ---
 
