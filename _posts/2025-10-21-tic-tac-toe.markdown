@@ -8,5 +8,4 @@ categories: apprenticeship update
 
 ttt testing
 
-
-https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html
+<link rel="canonical" href="https://nathandickinson32.github.io/my-blog/public/tic_tac_toe/index.html"/>
