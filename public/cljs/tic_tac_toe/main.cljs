@@ -15,17 +15,23 @@
            :O             :human
            :turn-count    0}))
 
+(defn winner? [board size]
+  (cond
+    (board/win? board :X size) :X
+    (board/win? board :O size) :O))
+
+(defn make-move [state move]
+  (let [new-state (gamec/->new-state state move)
+        new-board (:board new-state)
+        size      (:board-size new-state)
+        winner    (winner? new-board size)
+        draw      (board/full-board? new-board size)]
+    (swap! game-state merge new-state {:winner winner :draw draw})))
+
 (defn handle-move [move]
   (let [state @game-state]
     (when (not (:draw state))
-      (let [new-state (gamec/->new-state state move)
-            new-board (:board new-state)
-            size      (:board-size new-state)
-            winner    (cond
-                        (board/win? new-board :X size) :X
-                        (board/win? new-board :O size) :O)
-            draw      (board/full-board? new-board size)]
-        (swap! game-state merge new-state {:winner winner :draw draw})))))
+      (make-move state move))))
 
 (defn maybe-handle-ai-move []
   (let [state @game-state]
@@ -43,7 +49,7 @@
 (defn reset-game! []
   (swap! game-state reset-game))
 
-(defn button-square [row col]
+(defn ->button-square [row col]
   (let [{:keys [board winner draw]} @game-state
         value (get-in board [row col])]
     [:button.square
@@ -57,7 +63,7 @@
      (for [row (range size)
            col (range size)]
        ^{:key (str row "-" col)}
-       [button-square row col])]))
+       [->button-square row col])]))
 
 (defn board-grid! []
   (let [track (ratom/make-track! maybe-handle-ai-move [])]
@@ -67,7 +73,7 @@
        (fn []
          (->board-grid))})))
 
-(defn status-message []
+(defn ->status-message []
   (let [{:keys [current-token winner draw]} @game-state]
     (cond
       winner (str "Winner: " winner)
@@ -85,11 +91,17 @@
             :turn-count    0})))
 
 (defn size-selector []
-  [:div {:style {:margin "15px"}}
-   [:span "Board Size: "]
-   [:button.selection-button {:on-click #(set-board-size :3x3)} "3x3"]
-   [:button.selection-button {:on-click #(set-board-size :4x4)
-                              :style    {:margin-left "10px"}} "4x4"]])
+  (let [current-size (:board-size @game-state)]
+    [:div {:style {:margin "15px"}}
+     [:span "Board Size: "]
+     [:button.selection-button
+      {:on-click #(set-board-size :3x3)
+       :class    (when (= current-size :3x3) "active")}
+      "3x3"]
+     [:button.selection-button
+      {:on-click #(set-board-size :4x4)
+       :class    (when (= current-size :4x4) "active")}
+      "4x4"]]))
 
 (defn set-player-type-o [player-type]
   (swap! game-state
@@ -102,11 +114,17 @@
             :turn-count    0})))
 
 (defn player-selector []
-  [:div {:style {:margin "15px"}}
-   [:span "Player O: "]
-   [:button.selection-button.human {:on-click #(set-player-type-o :human)} "Human"]
-   [:button.selection-button.ai {:on-click #(set-player-type-o :expert-ai)
-                                 :style    {:margin-left "10px"}} "Expert AI"]])
+  (let [current-type (:O @game-state)]
+    [:div {:style {:margin "15px"}}
+     [:span "Player O: "]
+     [:button.selection-button.human
+      {:on-click #(set-player-type-o :human)
+       :class    (when (= current-type :human) "active")}
+      "Human"]
+     [:button.selection-button.ai
+      {:on-click #(set-player-type-o :expert-ai)
+       :class    (when (= current-type :expert-ai) "active")}
+      "Expert AI"]]))
 
 (defn app []
   [:div.container
@@ -114,7 +132,7 @@
    [size-selector]
    [player-selector]
    [board-grid!]
-   [:div {:style {:margin "10px"}} [status-message]]
+   [:div {:style {:margin "10px"}} [->status-message]]
    [:button.reset {:on-click reset-game!} "Reset"]])
 
 (defn ^:export main []

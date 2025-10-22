@@ -66,7 +66,7 @@
       (should (:draw @sut/game-state)))
 
     (it "does not allow moves after a win"
-      (let [state (swap! sut/game-state assoc :winner :X)
+      (let [state         (swap! sut/game-state assoc :winner :X)
             current-token (:current-token state)]
         (wire/click! "button.square:nth-of-type(5)")
         (should= current-token (:current-token state))
