@@ -13,7 +13,7 @@ all those locks open with the same key, and they're all attached to hinges on
 the outside. You've got a lot of locks, but your house isn't any more secure
 than it was before.
 
-This is exactly what happens when we write tests without thinking about *what* 
+This is exactly what happens when we write tests without thinking about what 
 we're testing. We end up with hundreds of tests, impressive code coverage
 numbers, and a false sense of security, until someone makes a small refactor and
 watches half the test suite explode in a sea of red.
@@ -35,14 +35,14 @@ do.
 
 But my tests? They failed. Epicly.
 
-Watching test after test turn red, even though the *behavior* of the code
+Watching test after test turn red, even though the behavior of the code
 hadn't changed at all, was humbling. I had written dozens of tests that were
-tightly coupled to the implementation details. I was testing *how* the code
-worked, not *what* it did. And in doing so, I had created a brittle test suite
+tightly coupled to the implementation details. I was testing how the code
+worked, not what it did. And in doing so, I had created a brittle test suite
 that would break every time someone tried to improve the code.
 
 That's when I realized: more tests doesn't automatically mean safer code. It
-matters *what* you test and *how* you test it.
+matters what you test and how you test it.
 
 ## The Coverage Trap
 
@@ -51,8 +51,8 @@ tells you what percentage of your code is executed during your tests. Many
 teams set coverage goals: "We must have 80% coverage!" or "We're aiming for 
 90%!"
 
-Here's the uncomfortable truth: **high coverage doesn't guarantee quality 
-tests.**
+Here's the uncomfortable truth: high coverage doesn't guarantee quality 
+tests.
 
 You can have 100% code coverage and still have a fragile, useless test suite. Consider this example:
 
@@ -86,7 +86,7 @@ You can have 100% code coverage and still have a fragile, useless test suite. Co
 
 Both tests give you coverage. But the first test will break if you refactor how
 the discount is calculated (maybe you move to a lookup table, or pull the
-percentages from a config file). The second test focuses on the *behavior* that
+percentages from a config file). The second test focuses on the behavior that
 matters to the business: premium customers get a better discount.
 
 ## What Makes a Test "Good"?
@@ -339,7 +339,7 @@ code more testable:
 ## When to Write More Tests, And When to Write Better Ones
 
 Not all testing problems are solved by writing more tests. Sometimes you need to
-write *different* tests.
+write different tests.
 
 **Write more tests when:**
 - You find a bug that wasn't caught by existing tests
