@@ -27,7 +27,7 @@ had just finished implementing a feature with what I thought was excellent test
 coverage. Every function had tests. Every edge case was covered. My coverage
 report showed 95%+. I was living the TDD dream.
 
-Then, a senior developer reviewed my code and suggested a simple refactoring.
+Then, a craftsman reviewed my code and suggested a simple refactoring.
 They extracted a private method, renamed a few variables for clarity, and 
 restructured how the classes interacted, all without changing the actual 
 behavior of the system. The feature still did exactly what it was supposed to
