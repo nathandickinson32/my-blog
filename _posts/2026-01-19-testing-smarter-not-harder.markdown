@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Testing Smarter, Not Harder"
-date: 2026-01-19 16:32:32 -0400
+date: 2026-01-19 12:22:32 -0400
 categories: apprenticeship update
 ---
 
