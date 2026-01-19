@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Play Tic Tac Toe!"
+title: "Testing Smarter, Not Harder"
 date: 2026-01-19 16:32:32 -0400
 categories: apprenticeship update
 ---
