@@ -235,12 +235,13 @@ how other components behave, not that it works with the actual components.
     ;; Only mock the external payment API
     (with-redefs [payment/charge! (stub :charge {:return {:id "pay-123"}})]
       (let [order  {:item "widget" :qty 5 :price 29.99}
-            result (process-order order)]
+            result (process-order order)
+            total  (:total result)]
         ;; Test real behavior of our validation, calculation, formatting
         (should= "success" (:status result))
-        (should= (* 5 29.99) (:total result))
+        (should= (* 5 29.99) total)
         ;; Verify the external interaction
-        (should-have-invoked :charge {:with [{:amount 149.95}]})))))
+        (should-have-invoked :charge {:with [total]})))))
 ```
 
 The key principle: Mock at the boundaries, integrate in the middle. If you
@@ -260,8 +261,8 @@ debug, and hard to maintain.
   (with-stubs)
   (it "handles entire registration process"
     ;; Tests validation
-    (should-not-be (valid-email? "bad-email"))
-    (should-be (valid-email? "good@email.com"))
+    (should-not-be valid-email? "bad-email")
+    (should-be valid-email? "good@email.com")
     
     ;; Tests password hashing
     (should< 20 (count (hash-password "password")))
@@ -279,10 +280,10 @@ debug, and hard to maintain.
 ;; Better - Separate, focused tests
 (describe "email-validation"
   (it "rejects invalid email formats"
-    (should-not-be (valid-email? "bad-email")))
+    (should-not-be valid-email? "bad-email"))
   
   (it "accepts valid email formats"
-    (should-be (valid-email? "good@email.com"))))
+    (should-be valid-email? "good@email.com")))
 
 (describe "password-hashing"
   (it "hashes passwords before storage"
