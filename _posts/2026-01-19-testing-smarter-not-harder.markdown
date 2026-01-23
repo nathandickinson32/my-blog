@@ -1,9 +1,3 @@
----
-layout: post
-title: "Testing Smarter, Not Harder"
-date: 2026-01-19 12:22:32 -0400
-categories: apprenticeship update
----
 
 # Testing Smarter, Not Harder: More Tests Doesn't Always Mean Safer Code
 
@@ -13,7 +7,7 @@ all those locks open with the same key, and they're all attached to hinges on
 the outside. You've got a lot of locks, but your house isn't any more secure
 than it was before.
 
-This is exactly what happens when we write tests without thinking about what 
+This is exactly what happens when we write tests without thinking about what
 we're testing. We end up with hundreds of tests, impressive code coverage
 numbers, and a false sense of security, until someone makes a small refactor and
 watches half the test suite explode in a sea of red.
@@ -28,8 +22,8 @@ coverage. Every function had tests. Every edge case was covered. My coverage
 report showed 95%+. I was living the TDD dream.
 
 Then, a craftsman reviewed my code and suggested a simple refactoring.
-They extracted a private method, renamed a few variables for clarity, and 
-restructured how the classes interacted, all without changing the actual 
+They extracted a private method, renamed a few variables for clarity, and
+restructured how the classes interacted, all without changing the actual
 behavior of the system. The feature still did exactly what it was supposed to
 do.
 
@@ -48,10 +42,10 @@ matters what you test and how you test it.
 
 Let's talk about code coverage for a moment. Code coverage is a metric that
 tells you what percentage of your code is executed during your tests. Many
-teams set coverage goals: "We must have 80% coverage!" or "We're aiming for 
-90%!"
+teams set coverage goals: _"We must have 80% coverage!"_ or _"We're aiming for
+90%!"_
 
-Here's the uncomfortable truth: high coverage doesn't guarantee quality 
+Here's the uncomfortable truth: high coverage doesn't guarantee quality
 tests.
 
 You can have 100% code coverage and still have a fragile, useless test suite. Consider this example:
@@ -89,15 +83,15 @@ the discount is calculated (maybe you move to a lookup table, or pull the
 percentages from a config file). The second test focuses on the behavior that
 matters to the business: premium customers get a better discount.
 
-## What Makes a Test "Good"?
+## What Makes a Test _"Good"_?
 
 During my apprenticeship, I learned that good tests share several
 characteristics:
 
 ### 1. They Test Behavior, Not Implementation
 
-Good tests answer the question: "What should this code do?" not "How does this
-code work?"
+Good tests answer the question: _"What should this code do?"_ not _"How does this
+code work?"_
 
 ```clojure
 ;; Bad - Testing implementation
@@ -118,17 +112,17 @@ code work?"
 ```
 
 The second test lets you change from quicksort to mergesort, or any other
-algorithm, without breaking the test. It tests the contract, not the 
+algorithm, without breaking the test. It tests the contract, not the
 implementation.
 
 ### 2. They are Friendly to Refactoring
 
-One of the main benefits of having tests is the freedom to refactor with 
+One of the main benefits of having tests is the freedom to refactor with
 confidence. But if your tests break every time you refactor, they're working
 against you instead of for you.
 
-Ask yourself: "If I renamed this method, moved this logic to another class, or
-restructured these conditionals, would my tests still pass?"
+Ask yourself: _"If I renamed this method, moved this logic to another class, or
+restructured these conditionals, would my tests still pass?"_
 
 If the answer is no, you might be testing implementation details.
 
@@ -155,9 +149,9 @@ immediately understand what the code is supposed to do.
 Through trial and error (mostly error), here are the patterns I learned
 to watch out for:
 
-### 1. The "Test Everything" Trap
+### 1. The _"Test Everything"_ Trap
 
-Not every line of code needs a dedicated test. Getters and setters? Probably 
+Not every line of code needs a dedicated test. Getters and setters? Probably
 don't need tests. Simple data transformations that are covered by higher-level
 tests? Skip them.
 
@@ -208,8 +202,8 @@ smell. Either:
 ### 3. Mocking Everything
 
 Mocks are powerful, but they can also create tests that pass even when the real
-code is broken. I learned to ask: "Am I mocking because it's necessary, or
-because it makes the test easier to write?"
+code is broken. I learned to ask: _"Am I mocking because it's necessary, or
+because it makes the test easier to write?"_
 Over-mocking often means you're testing implementation details. When you mock
 everything, your tests verify that your code works with your assumptions about
 how other components behave, not that it works with the actual components.
@@ -250,7 +244,7 @@ edges of your system like external APIs, databases, file systems, the network. T
 real integrations when you can, and use mocks for external dependencies that are
 slow, unreliable, or outside your control.
 
-### 4. The "One Giant Test" Pattern
+### 4. The _"One Giant Test"_ Pattern
 
 One massive test that tries to verify everything is hard to understand, hard to
 debug, and hard to maintain.
@@ -300,7 +294,7 @@ debug, and hard to maintain.
 
 ## Smart Testing Strategies from TDD
 
-Test-Driven Development taught me to think differently about testing. Here are 
+Test-Driven Development taught me to think differently about testing. Here are
 the strategies that helped me write better tests:
 
 ### 1. Write Tests First
@@ -316,7 +310,7 @@ Red → Green → Refactor
 This cycle ensures your tests are focused on what the code should do, not how it
 does it.
 
-### 2. The "Arrange, Act, Assert" Pattern
+### 2. The _"Arrange, Act, Assert"_ Pattern
 
 Structure your tests clearly:
 
@@ -338,8 +332,8 @@ This pattern makes tests easy to read and understand.
 
 ### 3. Test the Contract, Not the Implementation
 
-Think of your code as having a contract: "Given this input, I promise to produce
-this output." Test that contract.
+Think of your code as having a contract: _"Given this input, I promise to produce
+this output."_ Test that contract.
 
 ```clojure
 ;; The contract: "A user authenticator determines if credentials are valid"
@@ -371,17 +365,17 @@ code more testable:
 - **Interface Segregation**: Smaller interfaces mean focused, simpler tests
 - **Dependency Inversion**: You can inject test doubles easily
 
-## When to Write More Tests, And When to Write Better Ones
+## Quantity or Quality?
 
 Not all testing problems are solved by writing more tests. Sometimes you need to
 write different tests.
 
-**Write more tests when:**
+### Write more tests when:
 - You find a bug that wasn't caught by existing tests
 - You're adding new functionality
 - You're working with edge cases that aren't covered
 
-**Write better tests when:**
+### Write better tests when:
 - Your tests break during refactoring, but the behavior hasn't changed
 - You can't understand what a test is verifying
 - Tests take a long time to run
@@ -406,7 +400,7 @@ security and slow you down.
 
 Here's what I wish I had known when I started writing tests:
 
-1. **Test behavior, not implementation.** Ask "what should this do?" not "how does this work?"
+1. **Test behavior, not implementation.** Ask _"what should this do?"_ not _"how does this work?"_
 
 2. **Refactoring shouldn't break tests.** If it does, you're probably testing implementation details.
 
@@ -428,13 +422,13 @@ Looking back at that moment when my tests failed after a simple refactoring, it
 was a lesson learned. It taught me that writing tests is a skill that goes
 far beyond just achieving code coverage.
 
-Testing smarter means understanding the difference between implementation and 
+Testing smarter means understanding the difference between implementation and
 behavior. It means writing tests that give you confidence to refactor, that
-communicate intent clearly, and that serve as reliable safety nets when things 
+communicate intent clearly, and that serve as reliable safety nets when things
 go wrong.
 
-So next time you sit down to write tests, ask yourself: "Am I testing what this
-code does, or how it does it?" The answer will determine whether you're building
+So next time you sit down to write tests, ask yourself: _"Am I testing what this
+code does, or how it does it?"_ The answer will determine whether you're building
 those 100 useless locks or creating real security for your code.
 
 Stay intentional. Stay focused. Test smarter, not harder.
