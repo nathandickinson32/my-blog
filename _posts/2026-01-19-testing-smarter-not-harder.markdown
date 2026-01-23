@@ -66,7 +66,7 @@ You can have 100% code coverage and still have a fragile, useless test suite. Co
 ;; Bad test - tests implementation
 (describe "calculate-discount"
   (it "applies 20% discount for premium customers"
-    (let [customer {:premium? true}
+    (let [customer    {:premium? true}
           order-total 100]
       ;; This test is coupled to the implementation detail (0.20)
       (should= 20.0 (calculate-discount customer order-total))
@@ -77,7 +77,7 @@ You can have 100% code coverage and still have a fragile, useless test suite. Co
   (it "gives premium customers higher discount than regular customers"
     (let [premium-customer {:premium? true}
           regular-customer {:premium? false}
-          order-total 100
+          order-total      100
           premium-discount (calculate-discount premium-customer order-total)
           regular-discount (calculate-discount regular-customer order-total)]
       (should< regular-discount premium-discount)
@@ -104,7 +104,7 @@ code work?"
 (describe "sorter"
   (it "uses quicksort algorithm"
     (let [numbers [3 1 4 1 5]
-          sorter (->Sorter)]
+          sorter  (->Sorter)]
       ;; This test cares HOW we sort
       (should-have-invoked :quicksort {:with [numbers]}))))
 
@@ -112,7 +112,7 @@ code work?"
 (describe "sorter"
   (it "returns numbers in ascending order"
     (let [numbers [3 1 4 1 5]
-          result (sort-numbers numbers)]
+          result  (sort-numbers numbers)]
       ;; This test cares WHAT we get
       (should= [1 1 3 4 5] result))))
 ```
@@ -121,7 +121,7 @@ The second test lets you change from quicksort to mergesort, or any other
 algorithm, without breaking the test. It tests the contract, not the 
 implementation.
 
-### 2. Friendly to Refactoring
+### 2. They are Friendly to Refactoring
 
 One of the main benefits of having tests is the freedom to refactor with 
 confidence. But if your tests break every time you refactor, they're working
@@ -167,9 +167,9 @@ Focus on:
 - Complex algorithms
 - Code that's likely to break
 
-### 2. Testing Private Methods
+### 2. Testing Helper Methods
 
-If you feel the need to test a private method directly, that's often a code
+If you feel the need to test a helper method directly, that's often a code
 smell. Either:
 - The private method has complex logic that should be extracted into its own namespace or function
 - You're already testing it indirectly through the public API
@@ -178,10 +178,10 @@ smell. Either:
 ;; Bad - Testing implementation details
 (ns order-processor)
 
-(defn- apply-discount [order]
+(defn apply-discount [order]
   (* (:total order) 0.9))
 
-(defn- finalize [amount]
+(defn finalize [amount]
   {:amount amount :status "complete"})
 
 (defn process-order [order]
@@ -189,17 +189,17 @@ smell. Either:
       apply-discount
       finalize))
 
-;; Bad test - accessing private functions
+;; Bad test - accessing helper functions
 (describe "apply-discount"
   (it "applies 10% discount"
     (let [order {:total 100}]
       ;; This breaks encapsulation
-      (should= 90.0 (#'order-processor/apply-discount order)))))
+      (should= 90.0 (apply-discount order)))))
 
 ;; Better - Test the public behavior
 (describe "process-order"
   (it "applies discount and returns completed order"
-    (let [order {:total 100}
+    (let [order  {:total 100}
           result (process-order order)]
       (should= 90.0 (:amount result))
       (should= "complete" (:status result)))))
@@ -210,10 +210,44 @@ smell. Either:
 Mocks are powerful, but they can also create tests that pass even when the real
 code is broken. I learned to ask: "Am I mocking because it's necessary, or
 because it makes the test easier to write?"
+Over-mocking often means you're testing implementation details. When you mock
+everything, your tests verify that your code works with your assumptions about
+how other components behave—not that it works with the actual components.
 
-Over-mocking often means you're testing implementation details. Test real
-integrations when you can, and use mocks for external dependencies
-like databases or API calls.
+```clojure
+;; Bad - Mocking our own business logic
+(describe "process-order"
+  (with-stubs)
+  (it "processes order successfully"
+    (let [validator  (stub :validate {:return true})
+          calculator (stub :calculate-total {:return 149.95})
+          formatter  (stub :format-receipt {:return "receipt"})]
+      ;; Mocking everything we control - test is useless
+      (with-redefs [validate/order? validator
+                    calc/total      calculator
+                    format/receipt  formatter]
+        (should= "receipt" (process-order {:item "widget"}))))))
+
+;; Good - Mock external boundaries, test our logic
+(describe "process-order"
+  (with-stubs)
+  (it "processes valid order and charges payment"
+    ;; Only mock the external payment API
+    (with-redefs [payment/charge! (stub :charge {:return {:id "pay-123"}})]
+      (let [order  {:item "widget" :qty 5 :price 29.99}
+            result (process-order order)]
+        ;; Test real behavior of our validation, calculation, formatting
+        (should= "success" (:status result))
+        (should= (* 5 29.99) (:total result))
+        ;; Verify the external interaction
+        (should-have-invoked :charge {:with [{:amount 149.95}]})))))
+```
+
+The key principle: Mock at the boundaries, integrate in the middle. If you
+control both sides of an interaction, test them together. Reserve mocks for the
+edges of your system—external APIs, databases, file systems, the network. Test
+real integrations when you can, and use mocks for external dependencies that are
+slow, unreliable, or outside your control.
 
 ### 4. The "One Giant Test" Pattern
 
@@ -222,12 +256,12 @@ debug, and hard to maintain.
 
 ```clojure
 ;; Bad - One massive test
-(describe "user-registration-flow"
+(describe "user-registration-flow" 
+  (with-stubs)
   (it "handles entire registration process"
-    (with-stubs)
     ;; Tests validation
-    (should-not (valid-email? "bad-email"))
-    (should (valid-email? "good@email.com"))
+    (should-not-be (valid-email? "bad-email"))
+    (should-be (valid-email? "good@email.com"))
     
     ;; Tests password hashing
     (should< 20 (count (hash-password "password")))
@@ -245,10 +279,10 @@ debug, and hard to maintain.
 ;; Better - Separate, focused tests
 (describe "email-validation"
   (it "rejects invalid email formats"
-    (should-not (valid-email? "bad-email")))
+    (should-not-be (valid-email? "bad-email")))
   
   (it "accepts valid email formats"
-    (should (valid-email? "good@email.com"))))
+    (should-be (valid-email? "good@email.com"))))
 
 (describe "password-hashing"
   (it "hashes passwords before storage"
@@ -257,8 +291,8 @@ debug, and hard to maintain.
       (should< 20 (count hashed)))))
 
 (describe "user-registration"
+  (with-stubs)
   (it "sends welcome email after registration"
-    (with-stubs)
     (register-user {:email "test@test.com" :password "password"})
     (should-have-invoked :send-welcome-email {:with ["test@test.com"]})))
 ```
@@ -289,12 +323,12 @@ Structure your tests clearly:
 (describe "shopping-cart"
   (it "calculates total with multiple items"
     ;; Arrange - Set up the test data
-    (let [cart (create-cart)
+    (let [cart            (create-cart)
           cart-with-items (-> cart
                               (add-item {:price 10.00})
                               (add-item {:price 15.00}))
           ;; Act - Perform the action
-          total (calculate-total cart-with-items)]
+          total           (calculate-total cart-with-items)]
       ;; Assert - Verify the result
       (should= 25.00 total))))
 ```
