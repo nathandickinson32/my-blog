@@ -212,7 +212,7 @@ code is broken. I learned to ask: "Am I mocking because it's necessary, or
 because it makes the test easier to write?"
 Over-mocking often means you're testing implementation details. When you mock
 everything, your tests verify that your code works with your assumptions about
-how other components behave—not that it works with the actual components.
+how other components behave, not that it works with the actual components.
 
 ```clojure
 ;; Bad - Mocking our own business logic
@@ -245,7 +245,7 @@ how other components behave—not that it works with the actual components.
 
 The key principle: Mock at the boundaries, integrate in the middle. If you
 control both sides of an interaction, test them together. Reserve mocks for the
-edges of your system—external APIs, databases, file systems, the network. Test
+edges of your system like external APIs, databases, file systems, the network. Test
 real integrations when you can, and use mocks for external dependencies that are
 slow, unreliable, or outside your control.
 
