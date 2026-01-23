@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "Testing Smarter, Not Harder"
+date:   2026-01-19 15:55:00 -0400
+categories: apprenticeship update
+---
 
 # Testing Smarter, Not Harder: More Tests Doesn't Always Mean Safer Code
 
